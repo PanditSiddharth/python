@@ -50,7 +50,7 @@ ${chat.username ? "Username: @" + chat.username : ""}`, { chat_id: config.chatLo
     let min = (Math.floor(tsec / 60)) % 60
     let hr = Math.floor(tsec / 3600)
     ctx.reply(`=========================
-𝗥𝗲𝗮𝗹𝘁𝗶𝗺𝗲 𝗶/𝗼 𝗰𝗼𝗺𝗽𝗶𝗹𝗲𝗿 𝗯𝗼𝘁
+𝗥𝗲𝗮𝗹𝘁𝗶𝗺𝗲 python 𝗯𝗼𝘁
 =========================
 
 ${dt.version}
