@@ -22,7 +22,7 @@ const keep_alive = (obj: any = {}) => {
       }
 
       setTimeout(() => {
-        delete obj[rr.from.id + ""]
+        delete obj[rr.id + ""]
       }, 40000)
       // Perform any required operations with the received object
 
