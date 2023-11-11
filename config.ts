@@ -9,8 +9,8 @@ let config: Config = {
   errorLogs: ownerId, // chat or persion id
   ownerId,
   admins: [ownerId, 1942730863, 1580821417, 1643271211],
-  version: "1.1.0",
-  versionNo: 2,
+  version: "2.0.0",
+  versionNo: 3,
   ttl: 60,
   startSymbol: ".",
   owner: "", // You can give here your @username

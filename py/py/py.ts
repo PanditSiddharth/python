@@ -11,7 +11,7 @@ let h = new Hlp();
 const EventEmitter = require('events');
 let mid: any = 0;
 let timid: any;
-let editedMes: any = "Output: \n"
+let editedMes: any = "Output\: \n```py\n"
 let python: any;
 let fromId: any = 0;
 const ctxemitter = new EventEmitter();
@@ -28,6 +28,10 @@ let pyyoyopy = async (bot: Telegraf, ctx: any, obj: Opt = {}) => {
   let onlyTerminate = obj.onlyTerminate || false
 
   try {
+    const edit = async (messageId: any, messageText: any) => {
+      return await bot.telegram.editMessageText(ctx.chat.id, messageId, undefined, messageText + " ```", { parse_mode: "MarkdownV2" })
+    }
+
     if (onlyTerminate)
       return await terminate()
     if (ter)
@@ -80,7 +84,7 @@ let pyyoyopy = async (bot: Telegraf, ctx: any, obj: Opt = {}) => {
 
         // console.log('st: ' + data)
         if (mid == 0) {
-          mid = await ctx.reply("" + editedMes)
+          mid = await ctx.reply("" + editedMes + " ```", { parse_mode: "MarkdownV2" })
             .catch((err: any) => {
               if (err.message.includes('too long')) {
                 looperr = true
@@ -93,7 +97,7 @@ let pyyoyopy = async (bot: Telegraf, ctx: any, obj: Opt = {}) => {
         else {
           // editedMes += data
           try {
-            await bot.telegram.editMessageText(ctx.chat.id, mid.message_id, undefined, editedMes)
+            await edit(mid.message_id, editedMes)
               .catch((err) => { console.log(err) })
           } catch (err: any) { }
         }
@@ -110,9 +114,9 @@ let pyyoyopy = async (bot: Telegraf, ctx: any, obj: Opt = {}) => {
         try {
           editedMes += ctxx.message.text + "\n"
           if (mid == 0)
-            mid = await ctx.reply("" + editedMes)
+            mid = await ctx.reply("" + editedMes + " ```", { parse_mode: "MarkdownV2" })
           else
-            await bot.telegram.editMessageText(ctx.chat.id, mid.message_id, undefined, editedMes)
+            await edit(mid.message_id, editedMes)
           await python.stdin.write(ctxx.message.text + "\n")
         } catch (err: any) { console.log(err) }
 
@@ -282,7 +286,7 @@ let terminate = async (slow: any = true) => {
   h.sleep(500).then(() => { mid = 0 })
 
   ErrorMes = "Error: \n"
-  editedMes = "Output: \n"
+  editedMes = "Output\: \n```py\n"
 
   if (fs.existsSync(`./py/files/py${fromId}py.ts`)) {
     try {
